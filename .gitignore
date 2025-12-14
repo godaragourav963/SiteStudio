@@ -1,0 +1,15 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Node (future safe)
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
