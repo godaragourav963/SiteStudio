@@ -16,21 +16,44 @@ document.getElementById("add-text").addEventListener("click", () => {
 
 document.getElementById("add-section").addEventListener("click", () => {
   const section = document.createElement("div");
+  section.className = "section";
   section.style.border = "1px dashed #aaa";
-  section.style.padding = "10px";
-  section.textContent = "Section";
+  section.style.padding = "20px";
+  section.style.minHeight = "50px";
+
   addToCanvas(section);
 });
+
 
 function addToCanvas(el) {
   el.addEventListener("click", (e) => {
     e.stopPropagation();
     selectElement(el);
   });
-  canvas.appendChild(el);
+
+  if (selectedElement && selectedElement.classList.contains("section")) {
+    selectedElement.appendChild(el);
+  } else {
+    canvas.appendChild(el);
+  }
 }
 
+
 function selectElement(el) {
+  // Remove selection from previous
+  if (selectedElement) {
+    selectedElement.classList.remove("selected");
+  }
+
   selectedElement = el;
-  console.log("Selected:", el);
+  selectedElement.classList.add("selected");
+
+  console.log("Selected:", el.tagName);
 }
+
+canvas.addEventListener("click", () => {
+  if (selectedElement) {
+    selectedElement.classList.remove("selected");
+    selectedElement = null;
+  }
+});
