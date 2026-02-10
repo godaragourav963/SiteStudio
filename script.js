@@ -142,3 +142,46 @@ function rgbToHex(rgb) {
       .join("")
   );
 }
+
+
+document.getElementById("export-html").addEventListener("click", () => {
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SiteStudio Export</title>
+</head>
+<body>
+${canvas.innerHTML}
+</body>
+</html>
+  `;
+
+  downloadFile("sitestudio-export.html", html);
+});
+
+function downloadFile(filename, content) {
+  const blob = new Blob([content], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+canvas.addEventListener("wheel", (e) => {
+  if (
+    selectedElement &&
+    selectedElement.classList.contains("section")
+  ) {
+    e.preventDefault();
+    let currentWidth = parseInt(selectedElement.style.width) || 100;
+    currentWidth += e.deltaY < 0 ? 2 : -2;
+    currentWidth = Math.max(20, Math.min(100, currentWidth));
+    selectedElement.style.width = currentWidth + "%";
+  }
+});
