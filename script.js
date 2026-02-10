@@ -1,33 +1,36 @@
-const workspace = document.getElementById("workspace");
+const canvas = document.getElementById("canvas");
 
-document.getElementById("rectangle").addEventListener("click", () => {
-    const rect = document.createElement("div");
-    rect.style.width = "100px";
-    rect.style.height = "50px";
-    rect.style.background = "blue";
-    rect.style.position = "absolute";
-    rect.style.top = "10px";
-    rect.style.left = "10px";
-    rect.style.cursor = "move";
+let selectedElement = null;
 
-    workspace.appendChild(rect);
-
-    // Drag functionality
-    let offsetX, offsetY, isDragging = false;
-
-    rect.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        offsetX = e.clientX - rect.offsetLeft;
-        offsetY = e.clientY - rect.offsetTop;
-    });
-
-    document.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        rect.style.left = e.clientX - offsetX + "px";
-        rect.style.top = e.clientY - offsetY + "px";
-    });
-
-    document.addEventListener("mouseup", () => {
-        isDragging = false;
-    });
+document.getElementById("add-header").addEventListener("click", () => {
+  const h = document.createElement("h1");
+  h.textContent = "Header";
+  addToCanvas(h);
 });
+
+document.getElementById("add-text").addEventListener("click", () => {
+  const p = document.createElement("p");
+  p.textContent = "Text";
+  addToCanvas(p);
+});
+
+document.getElementById("add-section").addEventListener("click", () => {
+  const section = document.createElement("div");
+  section.style.border = "1px dashed #aaa";
+  section.style.padding = "10px";
+  section.textContent = "Section";
+  addToCanvas(section);
+});
+
+function addToCanvas(el) {
+  el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    selectElement(el);
+  });
+  canvas.appendChild(el);
+}
+
+function selectElement(el) {
+  selectedElement = el;
+  console.log("Selected:", el);
+}
