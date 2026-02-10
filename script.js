@@ -1,3 +1,7 @@
+const widthInput = document.getElementById("prop-width");
+const alignSelect = document.getElementById("prop-align");
+const bgInput = document.getElementById("prop-bg");
+
 const propertiesBox = document.getElementById("properties");
 const noSelection = document.getElementById("no-selection");
 
@@ -63,6 +67,13 @@ function selectElement(el) {
   fontSizeInput.value = parseInt(getComputedStyle(el).fontSize) || "";
   colorInput.value = rgbToHex(getComputedStyle(el).color);
   paddingInput.value = parseInt(getComputedStyle(el).padding) || "";
+  widthInput.value = parseInt(selectedElement.style.width) || "";
+  bgInput.value = selectedElement.style.backgroundColor 
+  ? rgbToHex(selectedElement.style.backgroundColor)
+  : "#ffffff";
+
+alignSelect.value = selectedElement.style.textAlign || "";
+
 }
 
 
@@ -101,6 +112,23 @@ paddingInput.addEventListener("input", () => {
   }
 });
 
+widthInput.addEventListener("input", () => {
+  if (selectedElement) {
+    selectedElement.style.width = widthInput.value + "%";
+  }
+});
+
+alignSelect.addEventListener("change", () => {
+  if (selectedElement) {
+    selectedElement.style.textAlign = alignSelect.value;
+  }
+});
+
+bgInput.addEventListener("input", () => {
+  if (selectedElement) {
+    selectedElement.style.backgroundColor = bgInput.value;
+  }
+});
 
 
 function rgbToHex(rgb) {
