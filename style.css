@@ -35,3 +35,15 @@ button {
 .selected {
   outline: 2px solid #3b82f6;
 }
+
+#properties-panel label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+#properties-panel input {
+  width: 100%;
+  margin-top: 4px;
+  padding: 6px;
+}

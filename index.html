@@ -19,9 +19,33 @@
     <main id="canvas"></main>
 
     <aside id="properties-panel">
-      <h3>Properties</h3>
-      <p>Select an element</p>
-    </aside>
+  <h3>Properties</h3>
+
+  <div id="no-selection">Select an element</div>
+
+  <div id="properties" style="display:none;">
+    <label>
+      Text
+      <input type="text" id="prop-text" />
+    </label>
+
+    <label>
+      Font Size (px)
+      <input type="number" id="prop-font-size" />
+    </label>
+
+    <label>
+      Text Color
+      <input type="color" id="prop-color" />
+    </label>
+
+    <label>
+      Padding (px)
+      <input type="number" id="prop-padding" />
+    </label>
+  </div>
+</aside>
+
   </div>
 
   <script src="script.js"></script>
